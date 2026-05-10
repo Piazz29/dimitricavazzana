@@ -2178,8 +2178,24 @@ a, button, [role="button"] { touch-action: manipulation; }
 @media (max-width: 768px) {
   .testimonials { padding: 60px 24px; }
   .testimonials__header { margin-bottom: 48px; }
-  .testimonials__grid { grid-template-columns: 1fr; }
-  .testimonial-card { padding: 28px 24px; }
+  .testimonials__grid {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 16px;
+    padding-bottom: 16px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .testimonials__grid::-webkit-scrollbar { display: none; }
+  .testimonial-card {
+    min-width: 85vw;
+    scroll-snap-align: start;
+    flex-shrink: 0;
+    padding: 28px 24px;
+  }
   .testimonial-card__text { font-size: 18px; }
   .review-form-inner { padding: 32px 20px; margin-top: 28px; }
   .review-form__title { font-size: 26px; }
