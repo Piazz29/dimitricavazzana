@@ -2184,6 +2184,8 @@ a, button, [role="button"] { touch-action: manipulation; }
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
+    touch-action: pan-x;
+    overscroll-behavior-x: contain;
     gap: 16px;
     padding-left: 24px;
     padding-right: 24px;
@@ -2202,11 +2204,34 @@ a, button, [role="button"] { touch-action: manipulation; }
     flex-shrink: 0;
     padding: 28px 24px;
   }
+  .testimonial-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 24px;
+  }
   .testimonial-card__text { font-size: 18px; }
   .review-form-inner { padding: 32px 20px; margin-top: 28px; }
   .review-form__title { font-size: 26px; }
   #review-form-wrapper.open { max-height: 2000px; }
   .review-toggle-btn { width: 100%; text-align: center; }
+}
+.testimonial-dots { display: none; }
+.testimonial-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(201, 168, 76, 0.3);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+}
+.testimonial-dot.active {
+  background: #C9A84C;
+  width: 20px;
+  border-radius: 3px;
 }
 </style>
 </head>
@@ -2437,6 +2462,7 @@ a, button, [role="button"] { touch-action: manipulation; }
       </div>
     </div>
   </div>
+  <div class="testimonial-dots" id="testimonialDots"></div>
 
   <div class="testimonials__actions">
     <button class="review-toggle-btn" id="reviewToggleBtn" data-i18n="testimonials.review_toggle">Share Your Experience →</button>
@@ -3706,6 +3732,88 @@ initClinicStatus();
   closeBtn.addEventListener('click', closeModal);
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && modal.classList.contains('policy-open')) closeModal();
+  });
+})();
+
+(function () {
+  var testimonialsGrid = document.querySelector('.testimonials__grid');
+  var dotsContainer = document.getElementById('testimonialDots');
+  var touchInitialized = false;
+  var dotsInitialized = false;
+
+  function initTouch() {
+    if (touchInitialized || !testimonialsGrid) return;
+    touchInitialized = true;
+    var startX, startY, isScrollingHorizontally;
+    testimonialsGrid.addEventListener('touchstart', function (e) {
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+      isScrollingHorizontally = undefined;
+    }, { passive: true });
+    testimonialsGrid.addEventListener('touchmove', function (e) {
+      if (!startX || !startY) return;
+      var diffX = Math.abs(e.touches[0].clientX - startX);
+      var diffY = Math.abs(e.touches[0].clientY - startY);
+      if (isScrollingHorizontally === undefined) {
+        isScrollingHorizontally = diffX > diffY;
+      }
+      if (isScrollingHorizontally) {
+        e.stopPropagation();
+      }
+    }, { passive: true });
+  }
+
+  function initDots() {
+    if (dotsInitialized || !testimonialsGrid || !dotsContainer) return;
+    dotsInitialized = true;
+    var cards = testimonialsGrid.querySelectorAll('.testimonial-card');
+    dotsContainer.innerHTML = '';
+    cards.forEach(function (_, index) {
+      var dot = document.createElement('button');
+      dot.className = 'testimonial-dot' + (index === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', 'Go to testimonial ' + (index + 1));
+      dot.addEventListener('click', function () {
+        testimonialsGrid.scrollTo({
+          left: index * (cards[0].offsetWidth + 16),
+          behavior: 'smooth'
+        });
+      });
+      dotsContainer.appendChild(dot);
+    });
+    dotsContainer.style.display = 'flex';
+    testimonialsGrid.addEventListener('scroll', function () {
+      var cards = testimonialsGrid.querySelectorAll('.testimonial-card');
+      var scrollLeft = testimonialsGrid.scrollLeft;
+      var cardWidth = cards[0].offsetWidth + 16;
+      var activeIndex = Math.round(scrollLeft / cardWidth);
+      document.querySelectorAll('.testimonial-dot').forEach(function (dot, i) {
+        dot.classList.toggle('active', i === activeIndex);
+      });
+    });
+  }
+
+  function teardownDots() {
+    if (!dotsInitialized || !dotsContainer) return;
+    dotsContainer.innerHTML = '';
+    dotsContainer.style.display = 'none';
+    dotsInitialized = false;
+  }
+
+  function checkBreakpoint() {
+    if (window.innerWidth <= 768) {
+      initTouch();
+      initDots();
+    } else {
+      teardownDots();
+    }
+  }
+
+  checkBreakpoint();
+
+  var resizeTimer;
+  window.addEventListener('resize', function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(checkBreakpoint, 150);
   });
 })();
 </script>
