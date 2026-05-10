@@ -2185,13 +2185,19 @@ a, button, [role="button"] { touch-action: manipulation; }
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     gap: 16px;
+    padding-left: 24px;
+    padding-right: 24px;
     padding-bottom: 16px;
     scrollbar-width: none;
     -ms-overflow-style: none;
   }
   .testimonials__grid::-webkit-scrollbar { display: none; }
   .testimonial-card {
-    min-width: 85vw;
+    min-width: calc(100vw - 48px);
+    max-width: calc(100vw - 48px);
+    box-sizing: border-box;
+    word-wrap: break-word;
+    overflow: hidden;
     scroll-snap-align: start;
     flex-shrink: 0;
     padding: 28px 24px;
