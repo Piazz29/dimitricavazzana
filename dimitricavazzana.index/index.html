@@ -2181,10 +2181,11 @@ a, button, [role="button"] { touch-action: manipulation; }
   .testimonials__grid {
     display: flex;
     flex-direction: row;
-    overflow-x: auto;
+    overflow-x: scroll;
+    overflow-y: visible;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
-    touch-action: pan-y pinch-zoom;
+    touch-action: pan-x;
     overscroll-behavior-x: contain;
     gap: 16px;
     padding-left: 24px;
@@ -2197,11 +2198,11 @@ a, button, [role="button"] { touch-action: manipulation; }
   .testimonial-card {
     min-width: calc(100vw - 48px);
     max-width: calc(100vw - 48px);
+    scroll-snap-align: start;
+    flex-shrink: 0;
     box-sizing: border-box;
     word-wrap: break-word;
     overflow: hidden;
-    scroll-snap-align: start;
-    flex-shrink: 0;
     padding: 28px 24px;
   }
   .testimonial-dots {
@@ -3718,40 +3719,7 @@ initClinicStatus();
 (function () {
   var testimonialsGrid = document.querySelector('.testimonials__grid');
   var dotsContainer = document.getElementById('testimonialDots');
-  var touchInitialized = false;
   var dotsInitialized = false;
-
-  function initTouch() {
-    if (touchInitialized || !testimonialsGrid) return;
-    touchInitialized = true;
-    var startX = 0;
-    var startY = 0;
-    var isDragging = false;
-    var isHorizontal = null;
-    testimonialsGrid.addEventListener('touchstart', function (e) {
-      startX = e.touches[0].clientX;
-      startY = e.touches[0].clientY;
-      isDragging = true;
-      isHorizontal = null;
-    }, { passive: true });
-    testimonialsGrid.addEventListener('touchmove', function (e) {
-      if (!isDragging) return;
-      var diffX = e.touches[0].clientX - startX;
-      var diffY = e.touches[0].clientY - startY;
-      if (isHorizontal === null) {
-        isHorizontal = Math.abs(diffX) > Math.abs(diffY);
-      }
-      if (!isHorizontal) return;
-      e.preventDefault();
-      testimonialsGrid.scrollLeft -= diffX;
-      startX = e.touches[0].clientX;
-      startY = e.touches[0].clientY;
-    }, { passive: false });
-    testimonialsGrid.addEventListener('touchend', function () {
-      isDragging = false;
-      isHorizontal = null;
-    }, { passive: true });
-  }
 
   function initDots() {
     if (dotsInitialized || !testimonialsGrid || !dotsContainer) return;
@@ -3791,7 +3759,6 @@ initClinicStatus();
 
   function checkBreakpoint() {
     if (window.innerWidth <= 768) {
-      initTouch();
       initDots();
     } else {
       teardownDots();
