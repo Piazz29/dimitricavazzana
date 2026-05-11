@@ -2184,7 +2184,7 @@ a, button, [role="button"] { touch-action: manipulation; }
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
-    touch-action: pan-x;
+    touch-action: pan-y pinch-zoom;
     overscroll-behavior-x: contain;
     gap: 16px;
     padding-left: 24px;
@@ -3724,22 +3724,32 @@ initClinicStatus();
   function initTouch() {
     if (touchInitialized || !testimonialsGrid) return;
     touchInitialized = true;
-    var startX, startY, isScrollingHorizontally;
+    var startX = 0;
+    var startY = 0;
+    var isDragging = false;
+    var isHorizontal = null;
     testimonialsGrid.addEventListener('touchstart', function (e) {
       startX = e.touches[0].clientX;
       startY = e.touches[0].clientY;
-      isScrollingHorizontally = undefined;
+      isDragging = true;
+      isHorizontal = null;
     }, { passive: true });
     testimonialsGrid.addEventListener('touchmove', function (e) {
-      if (!startX || !startY) return;
-      var diffX = Math.abs(e.touches[0].clientX - startX);
-      var diffY = Math.abs(e.touches[0].clientY - startY);
-      if (isScrollingHorizontally === undefined) {
-        isScrollingHorizontally = diffX > diffY;
+      if (!isDragging) return;
+      var diffX = e.touches[0].clientX - startX;
+      var diffY = e.touches[0].clientY - startY;
+      if (isHorizontal === null) {
+        isHorizontal = Math.abs(diffX) > Math.abs(diffY);
       }
-      if (isScrollingHorizontally) {
-        e.stopPropagation();
-      }
+      if (!isHorizontal) return;
+      e.preventDefault();
+      testimonialsGrid.scrollLeft -= diffX;
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+    }, { passive: false });
+    testimonialsGrid.addEventListener('touchend', function () {
+      isDragging = false;
+      isHorizontal = null;
     }, { passive: true });
   }
 
