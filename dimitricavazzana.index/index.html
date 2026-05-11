@@ -2185,7 +2185,7 @@ a, button, [role="button"] { touch-action: manipulation; }
     overflow-y: visible;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
-    touch-action: pan-x;
+    touch-action: pan-x pan-y;
     overscroll-behavior-x: contain;
     gap: 16px;
     padding-left: 24px;
@@ -2195,6 +2195,7 @@ a, button, [role="button"] { touch-action: manipulation; }
     -ms-overflow-style: none;
   }
   .testimonials__grid::-webkit-scrollbar { display: none; }
+  .testimonials__grid .testimonial-card { touch-action: pan-y; }
   .testimonial-card {
     min-width: calc(100vw - 48px);
     max-width: calc(100vw - 48px);
