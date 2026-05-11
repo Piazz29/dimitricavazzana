@@ -1282,6 +1282,249 @@ a, button, [role="button"] { touch-action: manipulation; }
 }
 .contact__direct a:hover { color: var(--accent); }
 
+/* ── MULTI-STEP FORM ── */
+.multistep-form-wrapper {
+  max-width: 560px;
+  margin: 0 auto;
+  text-align: left;
+}
+.form-progress-track {
+  width: 100%;
+  height: 1px;
+  background: rgba(201,168,76,0.15);
+  margin-bottom: 40px;
+  position: relative;
+}
+.form-progress-bar {
+  height: 1px;
+  background: #C9A84C;
+  width: 25%;
+  transition: width 0.4s ease;
+}
+.form-step-counter {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  color: #6B6B65;
+  text-transform: uppercase;
+  margin-bottom: 32px;
+}
+.step-divider {
+  margin: 0 4px;
+  color: rgba(201,168,76,0.3);
+}
+.form-step {
+  display: none;
+  animation: stepFadeIn 0.35s ease forwards;
+}
+.form-step.active {
+  display: block;
+}
+@keyframes stepFadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.form-step-question {
+  display: block;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px;
+  font-weight: 300;
+  color: #F0EDE6;
+  line-height: 1.3;
+  margin-bottom: 24px;
+}
+.form-step-question--sub {
+  font-size: 18px;
+  color: #A0A098;
+  margin-bottom: 12px;
+}
+.form-step-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(201,168,76,0.25);
+  color: #F0EDE6;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  padding: 12px 0;
+  outline: none;
+  transition: border-color 0.3s;
+  box-sizing: border-box;
+  border-radius: 0;
+  -webkit-appearance: none;
+}
+.form-step-input:focus {
+  border-bottom-color: #C9A84C;
+}
+.form-step-input::placeholder {
+  color: rgba(240,237,230,0.2);
+}
+.form-step-textarea {
+  resize: vertical;
+  border: 1px solid rgba(201,168,76,0.25);
+  border-bottom: 1px solid rgba(201,168,76,0.25);
+  padding: 16px;
+  margin-top: 4px;
+  min-height: 140px;
+  line-height: 1.7;
+}
+.form-step-textarea:focus {
+  border-color: rgba(201,168,76,0.6);
+  border-bottom-color: rgba(201,168,76,0.6);
+}
+.form-radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.form-radio-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  border: 1px solid rgba(201,168,76,0.2);
+  cursor: pointer;
+  transition: border-color 0.3s, background 0.3s;
+  position: relative;
+}
+.form-radio-card:hover {
+  border-color: rgba(201,168,76,0.5);
+  background: rgba(201,168,76,0.04);
+}
+.form-radio-card input[type="radio"] {
+  display: none;
+}
+.form-radio-card:has(input:checked) {
+  border-color: #C9A84C;
+  background: rgba(201,168,76,0.07);
+}
+.form-radio-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+.form-radio-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #F0EDE6;
+  letter-spacing: 0.05em;
+}
+.form-radio-sub {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 300;
+  color: #6B6B65;
+  letter-spacing: 0.03em;
+}
+.form-radio-check {
+  width: 16px;
+  height: 16px;
+  border: 1px solid rgba(201,168,76,0.4);
+  border-radius: 50%;
+  flex-shrink: 0;
+  position: relative;
+  transition: border-color 0.3s;
+}
+.form-radio-card:has(input:checked) .form-radio-check {
+  border-color: #C9A84C;
+}
+.form-radio-card:has(input:checked) .form-radio-check::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 7px;
+  height: 7px;
+  background: #C9A84C;
+  border-radius: 50%;
+}
+.form-step-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 36px;
+}
+.form-back-btn {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #6B6B65;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.3s;
+}
+.form-back-btn:hover { color: #F0EDE6; }
+.form-next-btn {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #0A0A08;
+  background: #C9A84C;
+  border: none;
+  padding: 14px 32px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.form-next-btn:hover { background: #E8D5A3; }
+.form-submit-btn {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #0A0A08;
+  background: #C9A84C;
+  border: none;
+  padding: 14px 32px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.form-submit-btn:hover { background: #E8D5A3; }
+.form-privacy-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 28px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 300;
+  color: #6B6B65;
+  line-height: 1.6;
+  cursor: pointer;
+}
+.form-privacy-label input[type="checkbox"] {
+  margin-top: 2px;
+  flex-shrink: 0;
+  accent-color: #C9A84C;
+  width: 14px;
+  height: 14px;
+}
+.form-privacy-link {
+  color: #C9A84C;
+  text-decoration: none;
+}
+.form-privacy-link:hover { text-decoration: underline; }
+@media (max-width: 768px) {
+  .form-step-question { font-size: 22px; }
+  .form-step-question--sub { font-size: 16px; }
+  .form-radio-card { padding: 16px; }
+  .form-next-btn,
+  .form-submit-btn { width: 100%; text-align: center; }
+  .form-step-actions {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    gap: 16px;
+  }
+}
+
 /* ── FOOTER ── */
 .footer {
   background: var(--bg-primary);
@@ -2230,11 +2473,48 @@ a, button, [role="button"] { touch-action: manipulation; }
     gap: 8px;
   }
   .testimonial-card__text { font-size: 18px; }
+  .testimonial-card {
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .testimonial-card.carousel-active {
+    display: flex;
+  }
+  .testimonial-text {
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    transition: none;
+  }
+  .testimonial-text.expanded {
+    display: block;
+    overflow: visible;
+    -webkit-line-clamp: unset;
+  }
+  .show-more-btn {
+    display: inline-block;
+    margin-top: 12px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #C9A84C;
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
   .review-form-inner { padding: 32px 20px; margin-top: 28px; }
   .review-form__title { font-size: 26px; }
   #review-form-wrapper.open { max-height: 2000px; }
   .review-toggle-btn { width: 100%; text-align: center; }
 }
+.show-more-btn { display: none; }
 .testimonial-dots { display: none; }
 .testimonial-dot {
   width: 6px;
@@ -2451,7 +2731,8 @@ a, button, [role="button"] { touch-action: manipulation; }
     <!-- PLACEHOLDER — replace with real review when approved -->
     <div class="testimonial-card reveal delay-1">
       <span class="testimonial-card__quote">"</span>
-      <p class="testimonial-card__text" data-i18n="testimonials.card1.text">I came to Dimitri with a consistent slice that had been ruining my game for years. After just five days I was hitting the ball straighter than I ever had. What surprised me most was how quickly he understood exactly what I needed to work on.</p>
+      <p class="testimonial-card__text testimonial-text" data-i18n="testimonials.card1.text">I came to Dimitri with a consistent slice that had been ruining my game for years. After just five days I was hitting the ball straighter than I ever had. What surprised me most was how quickly he understood exactly what I needed to work on.</p>
+      <button class="show-more-btn" data-i18n="testimonials.show_more">Show more</button>
       <div class="testimonial-card__divider"></div>
       <div class="testimonial-card__footer">
         <div>
@@ -2464,7 +2745,8 @@ a, button, [role="button"] { touch-action: manipulation; }
     <!-- PLACEHOLDER — replace with real review when approved -->
     <div class="testimonial-card reveal delay-2">
       <span class="testimonial-card__quote">"</span>
-      <p class="testimonial-card__text" data-i18n="testimonials.card2.text">We were a group of four friends with very different levels and Dimitri managed to work with each of us individually while keeping the energy of the group going. The location was stunning and the whole week felt more like a luxury experience than a training camp.</p>
+      <p class="testimonial-card__text testimonial-text" data-i18n="testimonials.card2.text">We were a group of four friends with very different levels and Dimitri managed to work with each of us individually while keeping the energy of the group going. The location was stunning and the whole week felt more like a luxury experience than a training camp.</p>
+      <button class="show-more-btn" data-i18n="testimonials.show_more">Show more</button>
       <div class="testimonial-card__divider"></div>
       <div class="testimonial-card__footer">
         <div>
@@ -2477,7 +2759,8 @@ a, button, [role="button"] { touch-action: manipulation; }
     <!-- PLACEHOLDER — replace with real review when approved -->
     <div class="testimonial-card reveal delay-3">
       <span class="testimonial-card__quote">"</span>
-      <p class="testimonial-card__text" data-i18n="testimonials.card3.text">I have taken lessons with several coaches over the years, but this was something else entirely. Dimitri has a calm and precise way of explaining things that actually makes sense on the course, not just on the range.</p>
+      <p class="testimonial-card__text testimonial-text" data-i18n="testimonials.card3.text">I have taken lessons with several coaches over the years, but this was something else entirely. Dimitri has a calm and precise way of explaining things that actually makes sense on the course, not just on the range.</p>
+      <button class="show-more-btn" data-i18n="testimonials.show_more">Show more</button>
       <div class="testimonial-card__divider"></div>
       <div class="testimonial-card__footer">
         <div>
@@ -2690,50 +2973,189 @@ a, button, [role="button"] { touch-action: manipulation; }
     <div style="background: rgba(201,168,76,0.06); border: 1px solid rgba(201,168,76,0.18); padding: 20px 28px; margin-bottom: 40px; max-width: 640px; margin-left: auto; margin-right: auto;">
       <span style="color: #C9A84C; margin-right: 10px;">ℹ</span><span style="font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 13px; color: #6B6B65; line-height: 1.7;" data-i18n="contact.notice">Pricing details and availability are discussed directly with Dimitri after your request. This form is to express your interest, not to confirm a booking.</span>
     </div>
-    <form id="booking-form" class="contact__form" action="https://formspree.io/f/xaqvlgen" method="POST">
-      <input type="hidden" name="_subject" value="New Clinic Booking Request — Dimitri Cavazzana">
-      <input type="hidden" name="_format" value="plain">
-      <div class="form-group">
-        <label for="name" data-i18n="contact.labelName">Full Name</label>
-        <input type="text" id="name" name="name" autocomplete="name" autocapitalize="words" required>
+    <div class="multistep-form-wrapper">
+
+      <!-- Progress bar -->
+      <div class="form-progress-track">
+        <div class="form-progress-bar" id="formProgressBar"></div>
       </div>
-      <div class="form-group">
-        <label for="email" data-i18n="contact.labelEmail">Email</label>
-        <input type="email" id="email" name="email" autocomplete="email" autocapitalize="off" autocorrect="off" spellcheck="false" inputmode="email" required>
+
+      <!-- Step counter -->
+      <div class="form-step-counter">
+        <span id="currentStep">1</span>
+        <span class="step-divider">/</span>
+        <span>4</span>
       </div>
-      <div class="form-group">
-        <label for="phone" data-i18n="contact.labelPhone">Phone (optional)</label>
-        <input type="tel" id="phone" name="phone" autocomplete="tel" inputmode="tel">
+
+      <!-- STEP 1 — Name -->
+      <div class="form-step active" data-step="1">
+        <label class="form-step-question"
+               data-i18n="contact.step1_label">
+          What's your name?
+        </label>
+        <input type="text"
+               id="field-name"
+               class="form-step-input"
+               placeholder="Giovanni Rossi"
+               autocomplete="name"
+               required>
+        <div class="form-step-actions">
+          <button type="button"
+                  class="form-next-btn"
+                  data-next="2"
+                  data-i18n="contact.next">
+            Continue
+          </button>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="location" data-i18n="contact.labelLocation">Preferred Location</label>
-        <select id="location" name="location">
-          <option value="south-tyrol" data-i18n="contact.optST">South Tyrol / Alto Adige / Südtirol</option>
-          <option value="dubai" data-i18n="contact.optDubai">Dubai</option>
-          <option value="mauritius" data-i18n="contact.optMauritius">Mauritius</option>
-          <option value="other-europe" data-i18n="contact.optOtherEurope">Other European location</option>
-          <option value="other" data-i18n="contact.optOther">Other</option>
-        </select>
+
+      <!-- STEP 2 — Location + Email + Phone -->
+      <div class="form-step" data-step="2">
+        <label class="form-step-question"
+               data-i18n="contact.step2_label">
+          Where are you based?
+        </label>
+        <input type="text"
+               id="field-location"
+               class="form-step-input"
+               placeholder="Milan, Italy"
+               autocomplete="off"
+               required>
+        <label class="form-step-question form-step-question--sub"
+               data-i18n="contact.step2b_label"
+               style="margin-top: 28px;">
+          Your email
+        </label>
+        <input type="email"
+               id="field-email"
+               class="form-step-input"
+               placeholder="giovanni@example.com"
+               autocomplete="email"
+               required>
+        <label class="form-step-question form-step-question--sub"
+               data-i18n="contact.step2c_label"
+               style="margin-top: 28px;">
+          Phone (optional)
+        </label>
+        <input type="tel"
+               id="field-phone"
+               class="form-step-input"
+               placeholder="+39 333 000 0000"
+               autocomplete="tel">
+        <div class="form-step-actions">
+          <button type="button"
+                  class="form-back-btn"
+                  data-prev="1"
+                  data-i18n="contact.back">
+            Back
+          </button>
+          <button type="button"
+                  class="form-next-btn"
+                  data-next="3"
+                  data-i18n="contact.next">
+            Continue
+          </button>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="clinicType" data-i18n="contact.labelClinicType">Clinic Type</label>
-        <select id="clinicType" name="clinicType">
-          <option value="private" data-i18n="contact.optClinicPrivate">Private Clinic (1 person)</option>
-          <option value="group" data-i18n="contact.optClinicGroup">Group Clinic (up to 6 people)</option>
-        </select>
+
+      <!-- STEP 3 — Clinic type -->
+      <div class="form-step" data-step="3">
+        <label class="form-step-question"
+               data-i18n="contact.step3_label">
+          Which clinic interests you?
+        </label>
+        <div class="form-radio-group">
+          <label class="form-radio-card">
+            <input type="radio"
+                   name="clinic_type"
+                   value="private">
+            <div class="form-radio-content">
+              <span class="form-radio-title"
+                    data-i18n="contact.step3_private">
+                Private Clinic
+              </span>
+              <span class="form-radio-sub"
+                    data-i18n="contact.step3_private_sub">
+                1 person · 5 days · From €3.500
+              </span>
+            </div>
+            <div class="form-radio-check"></div>
+          </label>
+          <label class="form-radio-card">
+            <input type="radio"
+                   name="clinic_type"
+                   value="group">
+            <div class="form-radio-content">
+              <span class="form-radio-title"
+                    data-i18n="contact.step3_group">
+                Group Clinic
+              </span>
+              <span class="form-radio-sub"
+                    data-i18n="contact.step3_group_sub">
+                Up to 6 people · 5 days · From €800
+              </span>
+            </div>
+            <div class="form-radio-check"></div>
+          </label>
+        </div>
+        <div class="form-step-actions">
+          <button type="button"
+                  class="form-back-btn"
+                  data-prev="2"
+                  data-i18n="contact.back">
+            Back
+          </button>
+          <button type="button"
+                  class="form-next-btn"
+                  data-next="4"
+                  data-i18n="contact.next">
+            Continue
+          </button>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="message" data-i18n="contact.labelMessage">Message</label>
-        <textarea id="message" name="message" rows="4" autocomplete="off"></textarea>
+
+      <!-- STEP 4 — Message + Privacy + Submit -->
+      <div class="form-step" data-step="4">
+        <label class="form-step-question"
+               data-i18n="contact.step4_label">
+          Tell Dimitri about your golf game
+          and what you want to improve.
+        </label>
+        <textarea id="field-message"
+                  class="form-step-input form-step-textarea"
+                  rows="5"
+                  data-i18n-placeholder="contact.step4_placeholder"
+                  placeholder="I've been playing for 10 years, my handicap is 18 and I struggle most with..."
+                  required></textarea>
+
+        <label class="form-privacy-label">
+          <input type="checkbox"
+                 id="privacy-check"
+                 required>
+          <span data-i18n="contact.privacy_text">I consent to the processing of my personal data in accordance with the <a href="#" data-policy-trigger class="form-privacy-link">Privacy Policy</a> (required).</span>
+        </label>
+
+        <div class="form-step-actions">
+          <button type="button"
+                  class="form-back-btn"
+                  data-prev="3"
+                  data-i18n="contact.back">
+            Back
+          </button>
+          <button type="button"
+                  id="form-submit-btn"
+                  class="form-submit-btn"
+                  data-i18n="contact.submit">
+            Send Request →
+          </button>
+        </div>
       </div>
-      <div class="form__consent">
-        <input type="checkbox" id="consentCheck" name="consent" required>
-        <label for="consentCheck">I consent to the processing of my personal data in accordance with the <a href="#" data-policy-trigger>Privacy Policy</a> (required).</label>
-      </div>
-      <button type="submit" class="form__submit" data-i18n="contact.submit">Request Your Clinic →</button>
-    </form>
+
+    </div>
+
+    <!-- Success message -->
     <div id="booking-success" style="display:none; text-align:center; padding: 60px 0;">
-      <p style="font-family:'Cormorant Garamond',serif; font-size:28px; color:#C9A84C; font-style:italic; margin-bottom:16px;" data-i18n="contact.success_title">"Your request has been received."</p>
+      <p style="font-family:'Cormorant Garamond',serif; font-size:28px; color:#C9A84C; font-style:italic; margin-bottom:16px;" data-i18n="contact.success_title">Your request has been received.</p>
       <p style="font-family:'Montserrat',sans-serif; font-size:13px; color:#6B6B65; letter-spacing:0.05em;" data-i18n="contact.success_sub">Dimitri will personally review it and be in touch shortly.</p>
     </div>
     <div class="contact__direct">
@@ -2847,13 +3269,23 @@ const i18n = {
       tag: '— Book a Clinic',
       title: 'Ready to experience the clinic?',
       subtitle: 'Private or group clinics tailored to your level and schedule. Available across Europe, the Middle East and Asia.',
-      labelName: 'Full Name', labelEmail: 'Email', labelPhone: 'Phone (optional)', labelLocation: 'Preferred Location', labelClinicType: 'Clinic Type', labelMessage: 'Message',
-      optST: 'South Tyrol / Alto Adige / Südtirol', optDubai: 'Dubai', optMauritius: 'Mauritius', optOtherEurope: 'Other European location', optOther: 'Other',
-      optClinicPrivate: 'Private Clinic (1 person)', optClinicGroup: 'Group Clinic (up to 6 people)',
-      submit: 'Request Your Clinic →',
       notice: 'Pricing details and availability are discussed directly with Dimitri after your request. This form is to express your interest, not to confirm a booking.',
-      success: 'Thank you. Dimitri will be in touch.',
-      success_title: '"Your request has been received."',
+      step1_label: "What's your name?",
+      step2_label: 'Where are you based?',
+      step2b_label: 'Your email',
+      step2c_label: 'Phone (optional)',
+      step3_label: 'Which clinic interests you?',
+      step3_private: 'Private Clinic',
+      step3_private_sub: '1 person · 5 days · From €3.500',
+      step3_group: 'Group Clinic',
+      step3_group_sub: 'Up to 6 people · 5 days · From €800',
+      step4_label: 'Tell Dimitri about your golf game and what you want to improve.',
+      step4_placeholder: "I've been playing for 10 years, my handicap is 18 and I struggle most with...",
+      next: 'Continue',
+      back: 'Back',
+      submit: 'Send Request →',
+      privacy_text: 'I consent to the processing of my personal data in accordance with the <a href="#" data-policy-trigger class="form-privacy-link">Privacy Policy</a> (required).',
+      success_title: 'Your request has been received.',
       success_sub: 'Dimitri will personally review it and be in touch shortly.'
     },
     faq: {
@@ -2891,6 +3323,8 @@ const i18n = {
         placeholderMessage: 'Tell us about your experience with Dimitri and the clinic...',
         submit: 'Submit Review →'
       },
+      show_more: 'Show more',
+      show_less: 'Show less',
       review_success_title: 'Thank you for sharing your experience.',
       review_success_sub: 'Dimitri will personally review your submission before it is published.',
       card1: {
@@ -2978,13 +3412,23 @@ const i18n = {
       tag: '— Prenota Clinic',
       title: 'Pronto a vivere la clinic?',
       subtitle: 'Clinic private o di gruppo adattate al tuo livello e ai tuoi tempi. Disponibili in Europa, Medio Oriente e Asia.',
-      labelName: 'Nome Completo', labelEmail: 'Email', labelPhone: 'Telefono (facoltativo)', labelLocation: 'Sede Preferita', labelClinicType: 'Tipo di Clinic', labelMessage: 'Messaggio',
-      optST: 'South Tyrol / Alto Adige / Südtirol', optDubai: 'Dubai', optMauritius: 'Mauritius', optOtherEurope: 'Altra location europea', optOther: 'Altro',
-      optClinicPrivate: 'Clinic Privata (1 persona)', optClinicGroup: 'Clinic di Gruppo (fino a 6 persone)',
-      submit: 'Richiedi la Tua Clinic →',
       notice: 'I dettagli sui prezzi e la disponibilità vengono discussi direttamente con Dimitri dopo la tua richiesta. Questo modulo serve per esprimere il tuo interesse, non per confermare una prenotazione.',
-      success: 'Grazie. Dimitri ti contatterà al più presto.',
-      success_title: '"La tua richiesta è stata ricevuta."',
+      step1_label: 'Come ti chiami?',
+      step2_label: 'Dove sei?',
+      step2b_label: 'La tua email',
+      step2c_label: 'Telefono (opzionale)',
+      step3_label: 'Quale clinic ti interessa?',
+      step3_private: 'Clinic Privata',
+      step3_private_sub: '1 persona · 5 giorni · Da €3.500',
+      step3_group: 'Clinic di Gruppo',
+      step3_group_sub: 'Fino a 6 persone · 5 giorni · Da €800',
+      step4_label: 'Raccontaci del tuo gioco e cosa vuoi migliorare.',
+      step4_placeholder: 'Gioco da 10 anni, il mio handicap è 18 e ho difficoltà principalmente con...',
+      next: 'Continua',
+      back: 'Indietro',
+      submit: 'Invia Richiesta →',
+      privacy_text: 'Acconsento al trattamento dei miei dati personali in conformità con la <a href="#" data-policy-trigger class="form-privacy-link">Privacy Policy</a> (obbligatorio).',
+      success_title: 'La tua richiesta è stata ricevuta.',
       success_sub: 'Dimitri la leggerà personalmente e ti contatterà a breve.'
     },
     faq: {
@@ -3022,6 +3466,8 @@ const i18n = {
         placeholderMessage: 'Raccontaci la tua esperienza con Dimitri e la clinic...',
         submit: 'Invia Recensione →'
       },
+      show_more: 'Mostra di più',
+      show_less: 'Mostra meno',
       review_success_title: 'Grazie per aver condiviso la tua esperienza.',
       review_success_sub: 'Dimitri leggerà personalmente la tua recensione prima della pubblicazione.',
       card1: {
@@ -3109,13 +3555,23 @@ const i18n = {
       tag: '— Clinic Buchen',
       title: 'Bereit für die Clinic-Erfahrung?',
       subtitle: 'Private oder Gruppen-Clinics, angepasst an Ihr Niveau und Ihren Zeitplan. Verfügbar in Europa, Naher Osten und Asien.',
-      labelName: 'Vollständiger Name', labelEmail: 'E-Mail', labelPhone: 'Telefon (optional)', labelLocation: 'Bevorzugter Standort', labelClinicType: 'Clinic-Typ', labelMessage: 'Nachricht',
-      optST: 'South Tyrol / Alto Adige / Südtirol', optDubai: 'Dubai', optMauritius: 'Mauritius', optOtherEurope: 'Andere europäische Location', optOther: 'Andere',
-      optClinicPrivate: 'Private Clinic (1 Person)', optClinicGroup: 'Gruppen-Clinic (bis zu 6 Personen)',
-      submit: 'Ihre Clinic Anfragen →',
       notice: 'Preisdetails und Verfügbarkeit werden nach Ihrer Anfrage direkt mit Dimitri besprochen. Dieses Formular dient zur Interessenbekundung, nicht zur Buchungsbestätigung.',
-      success: 'Vielen Dank. Dimitri wird sich bei Ihnen melden.',
-      success_title: '"Ihre Anfrage wurde empfangen."',
+      step1_label: 'Wie heißt du?',
+      step2_label: 'Wo bist du ansässig?',
+      step2b_label: 'Deine E-Mail',
+      step2c_label: 'Telefon (optional)',
+      step3_label: 'Welche Clinic interessiert dich?',
+      step3_private: 'Private Clinic',
+      step3_private_sub: '1 Person · 5 Tage · Ab €3.500',
+      step3_group: 'Gruppen-Clinic',
+      step3_group_sub: 'Bis zu 6 Personen · 5 Tage · Ab €800',
+      step4_label: 'Erzähl Dimitri von deinem Spiel und was du verbessern möchtest.',
+      step4_placeholder: 'Ich spiele seit 10 Jahren, mein Handicap ist 18 und ich habe vor allem Schwierigkeiten mit...',
+      next: 'Weiter',
+      back: 'Zurück',
+      submit: 'Anfrage Senden →',
+      privacy_text: 'Ich stimme der Verarbeitung meiner personenbezogenen Daten gemäß der <a href="#" data-policy-trigger class="form-privacy-link">Datenschutzrichtlinie</a> zu (erforderlich).',
+      success_title: 'Ihre Anfrage wurde empfangen.',
       success_sub: 'Dimitri wird sie persönlich prüfen und sich in Kürze melden.'
     },
     faq: {
@@ -3153,6 +3609,8 @@ const i18n = {
         placeholderMessage: 'Erzähl uns von deiner Erfahrung mit Dimitri und der Clinic...',
         submit: 'Rezension Einreichen →'
       },
+      show_more: 'Mehr anzeigen',
+      show_less: 'Weniger anzeigen',
       review_success_title: 'Danke, dass du deine Erfahrung geteilt hast.',
       review_success_sub: 'Dimitri wird deine Rezension persönlich prüfen, bevor sie veröffentlicht wird.',
       card1: {
@@ -3195,7 +3653,13 @@ function setLanguage(lang) {
     const keys = el.dataset.i18n.split('.');
     let val = i18n[lang];
     for (const k of keys) { val = val && val[k]; }
-    if (val) el.innerHTML = val;
+    if (val) {
+      if (el.classList.contains('show-more-btn')) {
+        el.textContent = val;
+      } else {
+        el.innerHTML = val;
+      }
+    }
   });
 
   // Update placeholder text for inputs/textareas
@@ -3426,23 +3890,105 @@ function initClinicStatus() {
   }
 }
 
-/* ── BOOKING FORM ── */
-document.getElementById('booking-form').addEventListener('submit', async function(e) {
-  e.preventDefault();
-  var form = e.target;
-  var data = new FormData(form);
-  try {
-    var response = await fetch(form.action, {
-      method: 'POST',
-      body: data,
-      headers: { 'Accept': 'application/json' }
-    });
-    if (response.ok) {
-      form.style.display = 'none';
-      document.getElementById('booking-success').style.display = 'block';
+/* ── BOOKING FORM (multi-step) ── */
+(function() {
+  var steps = document.querySelectorAll('.form-step');
+  var progressBar = document.getElementById('formProgressBar');
+  var currentStepEl = document.getElementById('currentStep');
+  var totalSteps = 4;
+  var currentStep = 1;
+
+  function showStep(n) {
+    steps.forEach(function(s) { s.classList.remove('active'); });
+    var target = document.querySelector('.form-step[data-step="' + n + '"]');
+    if (target) target.classList.add('active');
+    currentStep = n;
+    if (currentStepEl) currentStepEl.textContent = n;
+    if (progressBar) progressBar.style.width = (n / totalSteps * 100) + '%';
+  }
+
+  function validateStep(n) {
+    if (n === 1) {
+      return document.getElementById('field-name').value.trim().length > 0;
     }
-  } catch(err) { console.error(err); }
-});
+    if (n === 2) {
+      var loc = document.getElementById('field-location').value.trim();
+      var email = document.getElementById('field-email').value.trim();
+      return loc.length > 0 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+    if (n === 3) {
+      return !!document.querySelector('input[name="clinic_type"]:checked');
+    }
+    if (n === 4) {
+      var msg = document.getElementById('field-message').value.trim();
+      var privacy = document.getElementById('privacy-check').checked;
+      return msg.length > 0 && privacy;
+    }
+    return true;
+  }
+
+  function showError(stepEl) {
+    stepEl.classList.add('form-step--error');
+    setTimeout(function() { stepEl.classList.remove('form-step--error'); }, 500);
+  }
+
+  document.querySelectorAll('.form-next-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var next = parseInt(btn.dataset.next);
+      var stepEl = document.querySelector('.form-step[data-step="' + currentStep + '"]');
+      if (!validateStep(currentStep)) { showError(stepEl); return; }
+      showStep(next);
+    });
+  });
+
+  document.querySelectorAll('.form-back-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      showStep(parseInt(btn.dataset.prev));
+    });
+  });
+
+  var submitBtn = document.getElementById('form-submit-btn');
+  if (submitBtn) {
+    submitBtn.addEventListener('click', async function() {
+      if (!validateStep(4)) {
+        showError(document.querySelector('.form-step[data-step="4"]'));
+        return;
+      }
+      submitBtn.textContent = '...';
+      submitBtn.disabled = true;
+      var data = new FormData();
+      data.append('name',        document.getElementById('field-name').value);
+      data.append('location',    document.getElementById('field-location').value);
+      data.append('email',       document.getElementById('field-email').value);
+      data.append('phone',       document.getElementById('field-phone').value);
+      data.append('clinic_type', document.querySelector('input[name="clinic_type"]:checked').value);
+      data.append('message',     document.getElementById('field-message').value);
+      data.append('_subject',    'New Clinic Request — Dimitri Cavazzana');
+      data.append('_format',     'plain');
+      try {
+        var res = await fetch('https://formspree.io/f/xaqvlgen', {
+          method: 'POST', body: data, headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          document.querySelector('.multistep-form-wrapper').style.display = 'none';
+          document.getElementById('booking-success').style.display = 'block';
+        } else {
+          submitBtn.textContent = 'Try again';
+          submitBtn.disabled = false;
+        }
+      } catch(err) {
+        submitBtn.textContent = 'Try again';
+        submitBtn.disabled = false;
+      }
+    });
+  }
+
+  var styleEl = document.createElement('style');
+  styleEl.textContent = '.form-step--error{animation:formShake 0.4s ease;}@keyframes formShake{0%,100%{transform:translateX(0);}20%{transform:translateX(-8px);}40%{transform:translateX(8px);}60%{transform:translateX(-5px);}80%{transform:translateX(5px);}}';
+  document.head.appendChild(styleEl);
+
+  showStep(1);
+})();
 
 /* ── REVIEW FORM ── */
 // Star rating value sync
@@ -3741,8 +4287,8 @@ initClinicStatus();
     document.body.style.overflow = '';
   }
 
-  document.querySelectorAll('[data-policy-trigger]').forEach(function (el) {
-    el.addEventListener('click', openModal);
+  document.addEventListener('click', function(e) {
+    if (e.target.closest('[data-policy-trigger]')) openModal(e);
   });
   overlay.addEventListener('click', closeModal);
   closeBtn.addEventListener('click', closeModal);
@@ -3809,7 +4355,58 @@ function checkAndInitCarousel() {
   }
 }
 
-document.addEventListener('DOMContentLoaded', checkAndInitCarousel);
+function getCurrentTranslation(key) {
+  const lang = document.documentElement.lang || 'en';
+  const keys = key.split('.');
+  let val = i18n[lang];
+  for (const k of keys) {
+    if (!val) return key;
+    val = val[k];
+  }
+  return val || key;
+}
+
+function initShowMore() {
+  if (window.innerWidth > 768) return;
+
+  const cards = document.querySelectorAll('.testimonial-card');
+
+  cards.forEach(card => {
+    const text = card.querySelector('.testimonial-text');
+    const btn = card.querySelector('.show-more-btn');
+
+    if (!text || !btn) return;
+
+    const isOverflowing = text.scrollHeight > text.clientHeight;
+
+    if (!isOverflowing) {
+      btn.style.display = 'none';
+      return;
+    }
+
+    btn.style.display = 'inline-block';
+
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isExpanded = text.classList.contains('expanded');
+
+      if (isExpanded) {
+        text.classList.remove('expanded');
+        btn.setAttribute('data-i18n', 'testimonials.show_more');
+        btn.textContent = getCurrentTranslation('testimonials.show_more');
+      } else {
+        text.classList.add('expanded');
+        btn.setAttribute('data-i18n', 'testimonials.show_less');
+        btn.textContent = getCurrentTranslation('testimonials.show_less');
+      }
+    });
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  checkAndInitCarousel();
+  initShowMore();
+});
 </script>
 
 <!-- COOKIE CONSENT BANNER -->
