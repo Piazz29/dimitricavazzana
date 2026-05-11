@@ -738,21 +738,6 @@ a, button, [role="button"] { touch-action: manipulation; }
 .about__content.visible .about__tours .pill:nth-child(4) { transform: none; transition-delay: 0.64s; }
 
 /* About image — Ken Burns slow drift after reveal */
-.about__image.reveal--image.visible img {
-  -webkit-animation: kenburns 20s ease-in-out infinite alternate;
-  animation: kenburns 20s ease-in-out infinite alternate;
-  will-change: transform;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-}
-@-webkit-keyframes kenburns {
-  from { -webkit-transform: scale(1) translateZ(0); transform: scale(1) translateZ(0); }
-  to   { -webkit-transform: scale(1.05) translateZ(0); transform: scale(1.05) translateZ(0); }
-}
-@keyframes kenburns {
-  from { -webkit-transform: scale(1) translateZ(0); transform: scale(1) translateZ(0); }
-  to   { -webkit-transform: scale(1.05) translateZ(0); transform: scale(1.05) translateZ(0); }
-}
 
 /* Form inputs — accent left-border glow on focus */
 .form-group input:focus,
@@ -918,8 +903,6 @@ a, button, [role="button"] { touch-action: manipulation; }
 @supports (backdrop-filter: blur(1px)) {
   .clinic-card {
     background: rgba(12, 12, 10, 0.45);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
   }
 }
 .clinic-card__label {
@@ -1092,6 +1075,28 @@ a, button, [role="button"] { touch-action: manipulation; }
   gap: 80px;
   max-width: 1100px;
   margin: 0 auto 64px;
+}
+.tour-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 40px 0 48px;
+}
+.tour-badge {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #C9A84C;
+  border: 1px solid rgba(201,168,76,0.3);
+  padding: 8px 18px;
+  white-space: nowrap;
+  transition: border-color 0.3s, background 0.3s;
+}
+.tour-badge:hover {
+  border-color: rgba(201,168,76,0.7);
+  background: rgba(201,168,76,0.06);
 }
 .tours__timeline {
   display: flex;
@@ -1571,6 +1576,8 @@ a, button, [role="button"] { touch-action: manipulation; }
   /* Tours */
   .tours { padding: 60px 20px; }
   .tours__top { grid-template-columns: 1fr; gap: 36px; margin-bottom: 40px; }
+  .tour-badges { gap: 8px; margin: 28px 0 36px; }
+  .tour-badge { font-size: 9px; padding: 7px 14px; }
   .timeline-name { font-size: 20px; }
   .timeline-desc { font-size: 14px; line-height: 1.7; }
   .timeline-year { font-size: 12px; }
@@ -1588,8 +1595,6 @@ a, button, [role="button"] { touch-action: manipulation; }
   .reveal--image.visible { transform: scale(1); }
   .about__image.reveal { transform: translate3d(-40px, 0, 0); }
   .about__image.reveal.visible { transform: translate3d(0, 0, 0); }
-  /* Ken Burns runs on mobile too — same as desktop, just slower for battery */
-  .about__image.reveal--image.visible img { animation-duration: 28s; }
   .method__grid .method__item { transform: translate3d(0, 12px, 0); }
   .tours__timeline .timeline-item { transform: translate3d(-12px, 0, 0); }
 
@@ -2249,6 +2254,10 @@ a, button, [role="button"] { touch-action: manipulation; }
 @media (min-width: 769px) {
   .carousel-controls { display: none; }
   .testimonial-card { display: block !important; }
+  .hero__bg { background-position: center 15%; }
+}
+@media (min-width: 1800px) {
+  .hero__bg { background-position: center 10%; }
 }
 </style>
 </head>
@@ -2551,6 +2560,12 @@ a, button, [role="button"] { touch-action: manipulation; }
       <p class="section-tag" data-i18n="tours.tag">— Professional Background</p>
       <h2 class="section-title" data-i18n="tours.title">Tested at the highest level</h2>
       <p class="body-text" data-i18n="tours.text">Between 2020 and 2025, Dimitri competed across some of the most demanding professional circuits in golf. Those years of relentless discipline, travel, and performance now fuel every clinic he runs.</p>
+      <div class="tour-badges">
+        <span class="tour-badge">Alps Tour</span>
+        <span class="tour-badge">MENA Tour</span>
+        <span class="tour-badge">Clutch Tour</span>
+        <span class="tour-badge">Ecco Tour</span>
+      </div>
     </div>
     <div class="tours__timeline">
       <div class="timeline-item">
