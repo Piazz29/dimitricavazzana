@@ -1595,6 +1595,21 @@ a, button, [role="button"] { touch-action: manipulation; }
   transition: opacity 0.3s ease;
 }
 .footer__policy:hover { opacity: 1; }
+.footer-legal-link {
+  background: none;
+  border: none;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #6B6B65;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.3s;
+}
+.footer-legal-link:hover {
+  color: #C9A84C;
+}
 .footer__divider {
   height: 1px;
   background: var(--border-subtle);
@@ -2003,165 +2018,172 @@ a, button, [role="button"] { touch-action: manipulation; }
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 2000;
-  background: rgba(13,13,15,0.97);
-  border-top: 1px solid var(--border-subtle);
-  padding: 20px 80px;
+  z-index: 9999;
+  background: #111113;
+  border-top: 1px solid rgba(201,168,76,0.2);
+  padding: 20px 40px;
+  display: none;
 }
-@supports (backdrop-filter: blur(1px)) {
-  .cookie-banner {
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-  }
+.cookie-banner.visible {
+  display: block;
 }
-.cookie-banner {
+.cookie-banner-inner {
+  max-width: 1200px;
+  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 32px;
-  transform: translateY(100%);
-  transition: transform 0.5s var(--ease-premium);
+  flex-wrap: wrap;
 }
-.cookie-banner.cookie-visible { transform: translateY(0); }
-.cookie-banner__text {
-  font-family: var(--font-body);
+.cookie-banner-text {
+  font-family: 'Montserrat', sans-serif;
   font-size: 12px;
-  font-weight: 400;
-  letter-spacing: 0.03em;
-  color: #8A8A83;
-  line-height: 1.65;
+  font-weight: 300;
+  color: #6B6B65;
+  line-height: 1.6;
+  margin: 0;
+  flex: 1;
+  min-width: 200px;
 }
-.cookie-banner__text a {
-  color: var(--accent);
-  text-decoration: none;
-  transition: opacity 0.2s ease;
-}
-.cookie-banner__text a:hover { opacity: 0.75; }
-.cookie-banner__actions { display: flex; gap: 12px; flex-shrink: 0; }
-.cookie-banner__btn {
-  font-family: var(--font-body);
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  border: none;
-  padding: 10px 24px;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: opacity 0.2s ease;
-}
-.cookie-banner__btn--accept {
-  background: var(--accent);
-  color: var(--bg-primary);
-}
-.cookie-banner__btn--decline {
-  background: transparent;
-  color: #6A6A63;
-  border: 1px solid var(--border-subtle);
-}
-.cookie-banner__btn:hover { opacity: 0.8; }
-
-/* ── PRIVACY POLICY MODAL ── */
-.policy-modal {
-  position: fixed;
-  inset: 0;
-  z-index: 3000;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.35s ease;
-}
-.policy-modal.policy-open { opacity: 1; pointer-events: auto; }
-.policy-modal__overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(9,9,11,0.88);
-}
-.policy-modal__panel {
-  position: relative;
-  z-index: 1;
-  background: #111113;
-  border: 1px solid var(--border-subtle);
-  border-bottom: none;
-  width: 100%;
-  max-width: 760px;
-  max-height: 82vh;
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding: 56px 64px 64px;
-  transform: translateY(40px);
-  transition: transform 0.4s var(--ease-premium);
-  scrollbar-width: thin;
-  scrollbar-color: var(--border-subtle) transparent;
-}
-.policy-modal.policy-open .policy-modal__panel { transform: translateY(0); }
-.policy-modal__close {
-  position: sticky;
-  top: 0;
-  float: right;
+.cookie-link {
   background: none;
   border: none;
-  color: var(--accent);
-  font-size: 22px;
-  line-height: 1;
+  color: #C9A84C;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
   cursor: pointer;
-  padding: 4px 0 4px 16px;
-  opacity: 0.7;
-  transition: opacity 0.2s ease;
-  z-index: 2;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
-.policy-modal__close:hover { opacity: 1; }
-.policy-modal__content h2 {
-  font-family: var(--font-display);
-  font-size: 36px;
-  font-weight: 300;
-  letter-spacing: 0.02em;
-  color: var(--text-primary);
-  margin: 0 0 8px;
-  line-height: 1.1;
+.cookie-banner-actions {
+  display: flex;
+  gap: 12px;
+  flex-shrink: 0;
 }
-.policy-modal__content .pm-date {
-  font-family: var(--font-body);
+.cookie-reject-btn {
+  font-family: 'Montserrat', sans-serif;
   font-size: 10px;
-  font-weight: 400;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: #4A4A43;
-  margin-bottom: 40px;
+  color: #6B6B65;
+  background: transparent;
+  border: 1px solid rgba(107,107,101,0.4);
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.cookie-reject-btn:hover {
+  color: #F0EDE6;
+  border-color: rgba(240,237,230,0.3);
+}
+.cookie-accept-btn {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #0A0A08;
+  background: #C9A84C;
+  border: 1px solid #C9A84C;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.cookie-accept-btn:hover {
+  background: #E8D5A3;
+}
+@media (max-width: 768px) {
+  .cookie-banner { padding: 16px 20px; }
+  .cookie-banner-inner { flex-direction: column; gap: 16px; align-items: flex-start; }
+  .cookie-banner-actions { width: 100%; justify-content: flex-end; }
+}
+
+/* ── LEGAL OVERLAY ── */
+.legal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: #09090B;
+  overflow-y: auto;
+  display: none;
+  -webkit-overflow-scrolling: touch;
+}
+.legal-overlay.visible {
   display: block;
 }
-.policy-modal__content h3 {
-  font-family: var(--font-body);
-  font-size: 10px;
+.legal-overlay-inner {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 80px 40px 120px;
+  position: relative;
+}
+.legal-close-btn {
+  position: fixed;
+  top: 32px;
+  right: 40px;
+  background: transparent;
+  border: 1px solid rgba(201,168,76,0.3);
+  color: #C9A84C;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s;
+  z-index: 9999;
+}
+.legal-close-btn:hover {
+  background: rgba(201,168,76,0.1);
+}
+.legal-content h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 42px;
+  font-weight: 300;
+  color: #F0EDE6;
+  margin-bottom: 8px;
+}
+.legal-content .legal-date {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  color: #6B6B65;
+  letter-spacing: 0.1em;
+  margin-bottom: 48px;
+  display: block;
+}
+.legal-content h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
   font-weight: 500;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--accent);
-  margin: 36px 0 10px;
+  color: #C9A84C;
+  margin: 40px 0 16px;
 }
-.policy-modal__content p {
-  font-family: var(--font-body);
+.legal-content p,
+.legal-content li {
+  font-family: 'Montserrat', sans-serif;
   font-size: 13px;
-  font-weight: 400;
-  line-height: 1.85;
-  color: #7A7A73;
-  margin: 0 0 12px;
+  font-weight: 300;
+  color: #A0A098;
+  line-height: 1.9;
+  margin-bottom: 12px;
 }
-.policy-modal__content ul {
-  padding-left: 18px;
-  margin: 0 0 12px;
+.legal-content ul {
+  padding-left: 20px;
+  margin-bottom: 12px;
 }
-.policy-modal__content li {
-  font-family: var(--font-body);
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 1.85;
-  color: #7A7A73;
+.legal-content a {
+  color: #C9A84C;
+  text-decoration: none;
 }
-.policy-modal__content a { color: var(--accent); text-decoration: none; }
-.policy-modal__content strong { color: #A0A098; font-weight: 500; }
+.legal-content a:hover {
+  text-decoration: underline;
+}
+@media (max-width: 768px) {
+  .legal-overlay-inner { padding: 60px 24px 100px; }
+  .legal-close-btn { top: 16px; right: 16px; }
+  .legal-content h1 { font-size: 32px; }
+}
 
 /* Form consent */
 .form__consent {
@@ -2189,13 +2211,6 @@ a, button, [role="button"] { touch-action: manipulation; }
 }
 .form__consent label a { color: var(--accent); text-decoration: none; opacity: 0.85; transition: opacity 0.2s ease; }
 .form__consent label a:hover { opacity: 1; }
-
-@media (max-width: 768px) {
-  .cookie-banner { padding: 20px 24px; flex-direction: column; align-items: flex-start; gap: 16px; }
-  .cookie-banner__actions { align-self: flex-end; }
-  .policy-modal__panel { max-height: 88vh; padding: 40px 24px 56px; border-left: none; border-right: none; }
-  .policy-modal__content h2 { font-size: 28px; }
-}
 
 /* ── CLINIC STATUS BADGES ── */
 .clinic-status-badge {
@@ -3174,7 +3189,8 @@ a, button, [role="button"] { touch-action: manipulation; }
       <a href="tel:+393349842426" class="footer__contact-link">+39 334 9842426</a>
       <a href="mailto:cavazzanadimitri@yahoo.com" class="footer__contact-link">cavazzanadimitri@yahoo.com</a>
       <a href="https://www.instagram.com/dimitricavazzana/" target="_blank" rel="noopener noreferrer" class="footer__contact-link">@dimitricavazzana</a>
-      <a href="#" class="footer__policy" data-policy-trigger>Privacy Policy</a>
+      <button onclick="showPrivacyPolicy()" class="footer-legal-link" data-i18n="footer.privacy">Privacy Policy</button>
+      <button onclick="showCookiePolicy()" class="footer-legal-link" data-i18n="footer.cookies">Cookie Policy</button>
     </div>
   </div>
   <div class="footer__divider"></div>
@@ -3298,7 +3314,12 @@ const i18n = {
       q6: "What makes Dimitri's clinics different from standard golf instruction?",
       a6: 'Dimitri brings tour player methodology to every clinic: not textbook instruction, but the real approach used by professional athletes on competitive circuits. Combined with exclusive locations and a maximum of 1 (private) or 6 (group) participants, the experience is incomparable to any standard golf school.'
     },
-    footer: { copy: '&copy; 2026 Dimitri Cavazzana. All rights reserved.', locations: 'Europe · Middle East · Asia', tagline: 'Elite Golf Clinics' },
+    footer: { copy: '&copy; 2026 Dimitri Cavazzana. All rights reserved.', locations: 'Europe · Middle East · Asia', tagline: 'Elite Golf Clinics', privacy: 'Privacy Policy', cookies: 'Cookie Policy' },
+    cookies: {
+      banner_text: 'This site uses technical cookies and, if accepted, third-party cookies (Google Fonts). Read our <button class="cookie-link" onclick="showCookiePolicy()">Cookie Policy</button>.',
+      accept: 'Accept',
+      reject: 'Reject'
+    },
     testimonials: {
       tag: '— Experiences',
       title: 'What players say',
@@ -3441,7 +3462,12 @@ const i18n = {
       q6: 'Cosa rende le clinic di Dimitri diverse dall\'istruzione golf standard?',
       a6: 'Dimitri porta la metodologia da tour player in ogni clinic: non istruzione da manuale, ma l\'approccio reale degli atleti professionisti sui circuiti competitivi. Abbinata a location esclusive e a un massimo di 1 (privata) o 6 (gruppo) partecipanti, l\'esperienza non è paragonabile a nessuna scuola golf standard.'
     },
-    footer: { copy: '&copy; 2026 Dimitri Cavazzana. Tutti i diritti riservati.', locations: 'Europa · Medio Oriente · Asia', tagline: 'Golf Clinic Elite' },
+    footer: { copy: '&copy; 2026 Dimitri Cavazzana. Tutti i diritti riservati.', locations: 'Europa · Medio Oriente · Asia', tagline: 'Golf Clinic Elite', privacy: 'Privacy Policy', cookies: 'Cookie Policy' },
+    cookies: {
+      banner_text: 'Questo sito utilizza cookie tecnici e, se accettati, cookie di terze parti (Google Fonts). Leggi la nostra <button class="cookie-link" onclick="showCookiePolicy()">Cookie Policy</button>.',
+      accept: 'Accetta',
+      reject: 'Rifiuta'
+    },
     testimonials: {
       tag: '— Recensioni',
       title: 'Cosa dicono i giocatori',
@@ -3584,7 +3610,12 @@ const i18n = {
       q6: 'Was unterscheidet Dimitris Clinics vom Standard-Golfunterricht?',
       a6: 'Dimitri bringt Tour-Player-Methodik in jede Clinic: keine Lehrbuchanleitung, sondern den echten Ansatz, den professionelle Athleten auf Wettkampfstrecken anwenden.'
     },
-    footer: { copy: '&copy; 2026 Dimitri Cavazzana. Alle Rechte vorbehalten.', locations: 'Europa · Naher Osten · Asien', tagline: 'Elite Golf Clinics' },
+    footer: { copy: '&copy; 2026 Dimitri Cavazzana. Alle Rechte vorbehalten.', locations: 'Europa · Naher Osten · Asien', tagline: 'Elite Golf Clinics', privacy: 'Datenschutz', cookies: 'Cookie-Richtlinie' },
+    cookies: {
+      banner_text: 'Diese Website verwendet technische Cookies und, bei Zustimmung, Drittanbieter-Cookies (Google Fonts). Lesen Sie unsere <button class="cookie-link" onclick="showCookiePolicy()">Cookie-Richtlinie</button>.',
+      accept: 'Akzeptieren',
+      reject: 'Ablehnen'
+    },
     testimonials: {
       tag: '— Erfahrungen',
       title: 'Was Spieler sagen',
@@ -4230,66 +4261,151 @@ initClinicStatus();
     document.head.appendChild(link);
   }
 
-  // If visitor already accepted on a prior visit, load fonts immediately
-  if (localStorage.getItem('dc-cookie-consent') === 'accepted') {
+  if (localStorage.getItem('dc_cookie_consent') === 'accepted') {
     loadFonts();
   }
 
   window.__loadFontsOnConsent = loadFonts;
 })();
 
+/* ── LEGAL OVERLAY ── */
+var privacyPolicyHTML = `
+<h1>Privacy Policy</h1>
+<span class="legal-date">Last updated: May 2025</span>
+
+<h2>1. Data Controller</h2>
+<p>Dimitri Cavazzana, Via Col di Lana 16, 39100 Bolzano (BZ), Italy. P.IVA: IT03120620210.
+Email: <a href="mailto:cavazzanadimitri@yahoo.com">cavazzanadimitri@yahoo.com</a></p>
+
+<h2>2. Data Collected</h2>
+<p>When you submit a form on this website, the following personal data is collected:</p>
+<ul>
+<li>Full name</li>
+<li>Email address</li>
+<li>Phone number (optional)</li>
+<li>City and country of residence</li>
+<li>Free-text message content</li>
+</ul>
+<p>No sensitive data (health, religion, ethnicity, etc.) is intentionally collected.</p>
+
+<h2>3. Purpose and Legal Basis</h2>
+<p>Your data is collected exclusively to respond to your inquiry or clinic request (Art. 6(1)(b) GDPR — pre-contractual measures). It is not used for marketing or profiling purposes without your explicit consent.</p>
+
+<h2>4. Data Retention</h2>
+<p>Your data is retained for a maximum of 24 months from the date of collection, or until you request deletion.</p>
+
+<h2>5. Data Processors</h2>
+<p>Form submissions are processed by Formspree, Inc. (USA), which acts as a data processor under a Data Processing Agreement compliant with GDPR.
+Formspree Privacy Policy: <a href="https://formspree.io/legal/privacy-policy" target="_blank">formspree.io/legal/privacy-policy</a></p>
+<p>This website is hosted on Vercel Inc. (USA), which processes server logs in accordance with GDPR.
+Vercel Privacy Policy: <a href="https://vercel.com/legal/privacy-policy" target="_blank">vercel.com/legal/privacy-policy</a></p>
+<p>Google Fonts (Google LLC, USA) is used to load typefaces. If accepted via cookie consent, Google may collect your IP address.
+Google Privacy Policy: <a href="https://policies.google.com/privacy" target="_blank">policies.google.com/privacy</a></p>
+
+<h2>6. Your Rights (GDPR Art. 15-22)</h2>
+<p>You have the right to: access your data, request correction or deletion, restrict or object to processing, and data portability. To exercise these rights, contact:
+<a href="mailto:cavazzanadimitri@yahoo.com">cavazzanadimitri@yahoo.com</a></p>
+<p>You also have the right to lodge a complaint with the Italian Data Protection Authority (Garante per la Protezione dei Dati Personali):
+<a href="https://www.garanteprivacy.it" target="_blank">garanteprivacy.it</a></p>
+
+<h2>7. Data Transfers Outside the EU</h2>
+<p>Some processors (Formspree, Vercel, Google) are based in the USA. Transfers are covered by Standard Contractual Clauses (SCCs) as provided under Art. 46 GDPR.</p>
+
+<h2>8. No Automated Decision-Making</h2>
+<p>No automated decision-making or profiling is carried out on the basis of your personal data.</p>
+
+<h2>9. Changes to This Policy</h2>
+<p>This policy may be updated. The current version is always available at <a href="https://www.dimitricavazzana.com" target="_blank">dimitricavazzana.com</a>. Last updated: May 2025.</p>
+`;
+
+var cookiePolicyHTML = `
+<h1>Cookie Policy</h1>
+<span class="legal-date">Last updated: May 2025</span>
+
+<h2>1. What Are Cookies</h2>
+<p>Cookies are small text files stored on your device when you visit a website. They are used to ensure the proper functioning of the site and, in some cases, to improve the user experience.</p>
+
+<h2>2. Cookies Used on This Site</h2>
+
+<h2>Technical Cookies (always active)</h2>
+<p>These cookies are necessary for the site to function and cannot be disabled:</p>
+<ul>
+<li><strong>dc_cookie_consent</strong> — stores your cookie preference. Duration: 12 months. Set by: dimitricavazzana.com</li>
+</ul>
+
+<h2>Third-Party Cookies (optional)</h2>
+<p>These cookies are only set if you accept via the cookie banner:</p>
+<ul>
+<li><strong>Google Fonts</strong> — Google LLC loads font files from its CDN. Google may collect your IP address and browser information.
+Privacy Policy: <a href="https://policies.google.com/privacy" target="_blank">policies.google.com/privacy</a></li>
+</ul>
+
+<h2>3. Managing Cookies</h2>
+<p>You can accept or reject non-technical cookies via the banner shown on your first visit. You can also manage cookies through your browser settings:</p>
+<ul>
+<li>Chrome: Settings &gt; Privacy and Security &gt; Cookies</li>
+<li>Safari: Preferences &gt; Privacy</li>
+<li>Firefox: Options &gt; Privacy &amp; Security</li>
+</ul>
+<p>Disabling cookies may affect certain aspects of the site's appearance (e.g. fonts may fall back to system defaults).</p>
+
+<h2>4. Contact</h2>
+<p>For any questions about cookies on this site, contact:
+<a href="mailto:cavazzanadimitri@yahoo.com">cavazzanadimitri@yahoo.com</a></p>
+`;
+
+function showPrivacyPolicy() {
+  document.getElementById('legal-content').innerHTML = privacyPolicyHTML;
+  document.getElementById('legal-overlay').classList.add('visible');
+  document.body.style.overflow = 'hidden';
+}
+
+function showCookiePolicy() {
+  document.getElementById('legal-content').innerHTML = cookiePolicyHTML;
+  document.getElementById('legal-overlay').classList.add('visible');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLegalOverlay() {
+  document.getElementById('legal-overlay').classList.remove('visible');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('click', function(e) {
+  if (e.target.closest('[data-policy-trigger]')) {
+    e.preventDefault();
+    showPrivacyPolicy();
+  }
+});
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeLegalOverlay();
+});
+
 /* ── COOKIE CONSENT BANNER ── */
-(function () {
-  var banner = document.getElementById('cookieBanner');
-  if (!banner) return;
-  if (localStorage.getItem('dc-cookie-consent')) return;
-  requestAnimationFrame(function () {
-    requestAnimationFrame(function () {
-      banner.classList.add('cookie-visible');
-    });
-  });
-  function dismiss() {
-    banner.classList.remove('cookie-visible');
-    banner.addEventListener('transitionend', function () { banner.remove(); }, { once: true });
+document.addEventListener('DOMContentLoaded', function() {
+  setLanguage(currentLang);
+
+  function initCookieBanner() {
+    var consent = localStorage.getItem('dc_cookie_consent');
+    if (!consent) {
+      document.getElementById('cookie-banner').classList.add('visible');
+    }
   }
-  document.getElementById('cookieAccept').addEventListener('click', function () {
-    localStorage.setItem('dc-cookie-consent', 'accepted');
+
+  document.getElementById('cookieAccept').addEventListener('click', function() {
+    localStorage.setItem('dc_cookie_consent', 'accepted');
     if (window.__loadFontsOnConsent) window.__loadFontsOnConsent();
-    dismiss();
+    document.getElementById('cookie-banner').classList.remove('visible');
   });
-  document.getElementById('cookieDecline').addEventListener('click', function () {
-    localStorage.setItem('dc-cookie-consent', 'declined');
-    dismiss();
-  });
-})();
 
-/* ── PRIVACY POLICY MODAL ── */
-(function () {
-  var modal = document.getElementById('policyModal');
-  var overlay = document.getElementById('policyOverlay');
-  var closeBtn = document.getElementById('policyClose');
-  if (!modal) return;
-
-  function openModal(e) {
-    if (e) e.preventDefault();
-    modal.classList.add('policy-open');
-    document.body.style.overflow = 'hidden';
-    closeBtn.focus();
-  }
-  function closeModal() {
-    modal.classList.remove('policy-open');
-    document.body.style.overflow = '';
-  }
-
-  document.addEventListener('click', function(e) {
-    if (e.target.closest('[data-policy-trigger]')) openModal(e);
+  document.getElementById('cookieReject').addEventListener('click', function() {
+    localStorage.setItem('dc_cookie_consent', 'rejected');
+    document.getElementById('cookie-banner').classList.remove('visible');
   });
-  overlay.addEventListener('click', closeModal);
-  closeBtn.addEventListener('click', closeModal);
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && modal.classList.contains('policy-open')) closeModal();
-  });
-})();
+
+  initCookieBanner();
+});
 
 function initTestimonialsCarousel() {
   var cards = document.querySelectorAll('.testimonial-card');
@@ -4419,64 +4535,21 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 <!-- COOKIE CONSENT BANNER -->
-<div class="cookie-banner" id="cookieBanner" role="alert" aria-live="polite">
-  <p class="cookie-banner__text">This site uses Google Fonts loaded from Google's servers. No analytics or tracking cookies are set. By continuing you acknowledge our <a href="#" data-policy-trigger>Privacy Policy</a>.</p>
-  <div class="cookie-banner__actions">
-    <button class="cookie-banner__btn cookie-banner__btn--decline" id="cookieDecline">Decline</button>
-    <button class="cookie-banner__btn cookie-banner__btn--accept" id="cookieAccept">Accept</button>
+<div id="cookie-banner" class="cookie-banner">
+  <div class="cookie-banner-inner">
+    <p class="cookie-banner-text" data-i18n="cookies.banner_text">This site uses technical cookies and, if accepted, third-party cookies (Google Fonts). Read our <button class="cookie-link" onclick="showCookiePolicy()">Cookie Policy</button>.</p>
+    <div class="cookie-banner-actions">
+      <button class="cookie-reject-btn" id="cookieReject" data-i18n="cookies.reject">Reject</button>
+      <button class="cookie-accept-btn" id="cookieAccept" data-i18n="cookies.accept">Accept</button>
+    </div>
   </div>
 </div>
 
-<!-- PRIVACY POLICY MODAL -->
-<div class="policy-modal" id="policyModal" role="dialog" aria-modal="true" aria-labelledby="policyTitle">
-  <div class="policy-modal__overlay" id="policyOverlay"></div>
-  <div class="policy-modal__panel">
-    <button class="policy-modal__close" id="policyClose" aria-label="Close privacy policy">&#x2715;</button>
-    <div class="policy-modal__content">
-      <h2 id="policyTitle">Privacy Policy</h2>
-      <span class="pm-date">Last updated: April 2026</span>
-
-      <h3>Data Controller</h3>
-      <p><strong>Dimitri Cavazzana</strong> — Private Golf Coach<br>
-      Email: <a href="mailto:cavazzanadimitri@yahoo.com">cavazzanadimitri@yahoo.com</a><br>
-      Phone: <a href="tel:+393349842426">+39 334 9842426</a><br>
-      Location: South Tyrol, Italy</p>
-
-      <h3>Data We Collect</h3>
-      <p>When you use the contact form on this website, you may provide the following personal data: full name, email address, phone number (optional), preferred coaching location, and a personal message. This data is used solely to respond to your inquiry.</p>
-
-      <h3>Purpose & Legal Basis</h3>
-      <p>Your data is processed for the following purpose: to respond to your coaching inquiry and, where relevant, to enter into a pre-contractual or contractual relationship. The legal basis is Art. 6(1)(b) GDPR (performance of a contract or pre-contractual steps) and, where applicable, Art. 6(1)(a) GDPR (your consent).</p>
-
-      <h3>Data Retention</h3>
-      <p>Personal data submitted via the contact form is retained only as long as necessary to respond to your inquiry. No data is stored in an automated database. You may request deletion of your data at any time by contacting the data controller directly.</p>
-
-      <h3>Third-Party Services</h3>
-      <p>This website loads typefaces from <strong>Google Fonts</strong> (fonts.googleapis.com / fonts.gstatic.com), a service operated by Google LLC. When your browser requests these fonts, Google may receive your IP address and browser metadata. We have no control over Google's data processing. For details, see <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google's Privacy Policy</a>.</p>
-      <p>No analytics platforms, advertising networks, or other tracking services are used on this website.</p>
-
-      <h3>Cookies</h3>
-      <p>This website does not set first-party cookies. Google Fonts requests may result in technical data being logged by Google's servers. Your cookie consent preference is stored in your browser's <strong>localStorage</strong> only (not transmitted to any server).</p>
-
-      <h3>Your Rights Under GDPR</h3>
-      <p>If you are located in the European Economic Area, you have the following rights regarding your personal data:</p>
-      <ul>
-        <li><strong>Right of access</strong> — request a copy of your personal data</li>
-        <li><strong>Right to rectification</strong> — request correction of inaccurate data</li>
-        <li><strong>Right to erasure</strong> — request deletion of your data ("right to be forgotten")</li>
-        <li><strong>Right to restriction</strong> — request limitation of processing</li>
-        <li><strong>Right to data portability</strong> — receive your data in a machine-readable format</li>
-        <li><strong>Right to object</strong> — object to processing based on legitimate interest</li>
-        <li><strong>Right to withdraw consent</strong> — withdraw consent at any time without affecting prior processing</li>
-      </ul>
-      <p>To exercise any of these rights, contact: <a href="mailto:cavazzanadimitri@yahoo.com">cavazzanadimitri@yahoo.com</a></p>
-
-      <h3>Supervisory Authority</h3>
-      <p>If you believe your data has been processed unlawfully, you have the right to lodge a complaint with the Italian data protection authority: <strong>Garante per la protezione dei dati personali</strong> — <a href="https://www.garanteprivacy.it" target="_blank" rel="noopener noreferrer">www.garanteprivacy.it</a></p>
-
-      <h3>Changes to This Policy</h3>
-      <p>This privacy policy may be updated periodically. The date at the top of this page reflects the most recent revision. Continued use of this website after changes constitutes acceptance of the updated policy.</p>
-    </div>
+<!-- LEGAL OVERLAY -->
+<div id="legal-overlay" class="legal-overlay">
+  <div class="legal-overlay-inner">
+    <button class="legal-close-btn" onclick="closeLegalOverlay()">&#x2715;</button>
+    <div id="legal-content" class="legal-content"></div>
   </div>
 </div>
 
