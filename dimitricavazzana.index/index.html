@@ -4371,7 +4371,22 @@ function initShowMore() {
 
     if (!text || !btn) return;
 
+    // Temporarily show card to measure
+    const wasHidden = !card.classList.contains('carousel-active');
+
+    if (wasHidden) {
+      card.style.display = 'block';
+      card.style.visibility = 'hidden';
+      card.style.position = 'absolute';
+    }
+
     const isOverflowing = text.scrollHeight > text.clientHeight;
+
+    if (wasHidden) {
+      card.style.display = '';
+      card.style.visibility = '';
+      card.style.position = '';
+    }
 
     if (!isOverflowing) {
       btn.style.display = 'none';
