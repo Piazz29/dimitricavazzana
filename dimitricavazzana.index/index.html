@@ -2619,7 +2619,7 @@ a, button, [role="button"] { touch-action: manipulation; }
 
 <!-- ABOUT -->
 <section class="about" id="about" aria-label="About Dimitri Cavazzana">
-  <div class="about__image reveal reveal--image reveal--repeat">
+  <div class="about__image reveal reveal--image">
     <img src="img/about1.jpg" alt="Dimitri Cavazzana, private golf coach — South Tyrol, Italy" loading="lazy" decoding="async" width="800" height="1067">
   </div>
   <div class="about__content reveal">
@@ -3840,6 +3840,7 @@ window.addEventListener('scroll', () => {
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     const el = entry.target;
+    const repeat = el.classList.contains('reveal--repeat');
     if (entry.isIntersecting) {
       el.style.willChange = 'opacity, transform';
       requestAnimationFrame(() => {
@@ -3848,9 +3849,12 @@ const observer = new IntersectionObserver((entries) => {
           el.addEventListener('transitionend', () => {
             el.style.willChange = 'auto';
           }, { once: true });
+          if (!repeat) {
+            observer.unobserve(el);
+          }
         });
       });
-    } else {
+    } else if (repeat) {
       el.classList.remove('visible');
       el.style.willChange = 'auto';
     }
